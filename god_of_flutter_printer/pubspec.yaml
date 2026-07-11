@@ -2,7 +2,7 @@ name: god_of_flutter_printer
 description: >-
   God of Flutter Printer — cross-platform thermal & label printing (ESC/POS, TSPL, ZPL)
   for Windows, Android, iOS, and Web. USB, Bluetooth/BLE, and network TCP.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/bala-404/god_of_flutter_printer
 repository: https://github.com/bala-404/god_of_flutter_printer
 issue_tracker: https://github.com/bala-404/god_of_flutter_printer/issues
@@ -15,8 +15,8 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.2.2
-  god_of_flutter_printer_platform_interface: ^0.1.0
-  god_of_flutter_printer_windows: ^0.1.0
+  god_of_flutter_printer_platform_interface: ^0.1.1
+  god_of_flutter_printer_windows: ^0.1.1
 
 dev_dependencies:
   flutter_test:

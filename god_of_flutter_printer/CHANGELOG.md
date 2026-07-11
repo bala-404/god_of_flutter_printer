@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Expanded README license section with full MIT summary and publisher links.
+
 ## 0.1.0
 
 * Initial pub.dev release as **God of Flutter Printer** (`god_of_flutter_printer`).
