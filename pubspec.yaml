@@ -1,0 +1,6 @@
+name: god_of_flutter_printer_workspace
+description: Workspace root for God of Flutter Printer and example apps.
+publish_to: none
+
+environment:
+  sdk: ^3.5.0

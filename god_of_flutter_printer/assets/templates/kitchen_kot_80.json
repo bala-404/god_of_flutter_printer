@@ -1,0 +1,57 @@
+{
+  "id": "kitchen_kot_80",
+  "protocol": "escpos",
+  "paperWidthMm": 80,
+  "blocks": [
+    {
+      "type": "text",
+      "text": "Kitchen Order Printer",
+      "align": "center",
+      "bold": true,
+      "size": "large"
+    },
+    {
+      "type": "text",
+      "text": "{{dateTime}}",
+      "align": "center",
+      "when": "dateTime"
+    },
+    {
+      "type": "text",
+      "text": "KOT - {{orderNo}}",
+      "align": "center",
+      "when": "orderNo"
+    },
+    {
+      "type": "text",
+      "text": "{{orderType}}",
+      "align": "center",
+      "bold": true,
+      "when": "orderType"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "text",
+      "text": "Biller: {{biller}}",
+      "when": "biller"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "table",
+      "columns": ["Product", "Special Note", "Qty"],
+      "itemsField": "items",
+      "rowTemplate": ["{{name}}", "{{specialNote}}", "{{qty}}"],
+      "columnCount": 3,
+      "layout": "kot",
+      "boldHeader": true
+    },
+    {
+      "type": "cut",
+      "feedLines": 3
+    }
+  ]
+}

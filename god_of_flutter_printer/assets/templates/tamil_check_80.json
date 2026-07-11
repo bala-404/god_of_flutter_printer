@@ -1,0 +1,66 @@
+{
+  "id": "tamil_check_80",
+  "protocol": "escpos",
+  "paperWidthMm": 80,
+  "blocks": [
+    {
+      "type": "text",
+      "text": "TAMIL PRINT CHECK",
+      "align": "center",
+      "bold": true,
+      "size": "large"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "text",
+      "text": "{{greeting}}",
+      "align": "center",
+      "bold": true,
+      "locale": "ta"
+    },
+    {
+      "type": "text",
+      "text": "Shop: {{shopName}}",
+      "locale": "ta"
+    },
+    {
+      "type": "text",
+      "text": "Order: {{orderId}}   Date: {{date}}"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "table",
+      "columns": ["Product (TA)", "Qty", "Amount"],
+      "itemsField": "items",
+      "rowTemplate": ["{{nameTa}}", "{{qty}}", "{{amount}}"],
+      "locale": "ta"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "text",
+      "text": "Total: {{total}}",
+      "align": "right",
+      "bold": true
+    },
+    {
+      "type": "text",
+      "text": "{{thankYou}}",
+      "align": "center",
+      "locale": "ta"
+    },
+    {
+      "type": "text",
+      "text": "English line: {{englishNote}}"
+    },
+    {
+      "type": "cut",
+      "feedLines": 4
+    }
+  ]
+}

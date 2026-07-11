@@ -1,0 +1,5 @@
+dependency_overrides:
+  god_of_flutter_printer_platform_interface:
+    path: ../god_of_flutter_printer_platform_interface
+  god_of_flutter_printer_windows:
+    path: ../god_of_flutter_printer_windows

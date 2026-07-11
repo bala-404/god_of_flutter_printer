@@ -1,0 +1,24 @@
+name: print_agent
+description: Local webhook print agent — Chrome/web POSTs here, USB printer on this PC prints.
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  god_of_flutter_printer_platform_interface:
+    path: ../god_of_flutter_printer_platform_interface
+  god_of_flutter_printer_windows:
+    path: ../god_of_flutter_printer_windows
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true

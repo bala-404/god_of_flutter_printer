@@ -1,0 +1,199 @@
+{
+  "id": "invoice_80",
+  "protocol": "escpos",
+  "paperWidthMm": 80,
+  "blocks": [
+    {
+      "type": "text",
+      "text": "{{duplicateLabel}}",
+      "align": "right",
+      "bold": true,
+      "when": "duplicateLabel"
+    },
+    {
+      "type": "text",
+      "text": "{{shopName}}",
+      "align": "center",
+      "bold": true,
+      "size": "large",
+      "when": "shopName"
+    },
+    {
+      "type": "text",
+      "text": "{{shopTagline}}",
+      "align": "center",
+      "when": "shopTagline"
+    },
+    {
+      "type": "text",
+      "text": "{{shopAddress}}",
+      "align": "center",
+      "when": "shopAddress"
+    },
+    {
+      "type": "text",
+      "text": "GSTIN : {{gstin}}",
+      "align": "center",
+      "when": "gstin"
+    },
+    {
+      "type": "text",
+      "text": "PHONE : {{phone}}",
+      "align": "center",
+      "when": "phone"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "row",
+      "left": "{{date}} {{time}}",
+      "right": "Bill No: {{billNo}}",
+      "when": "billNo"
+    },
+    {
+      "type": "row",
+      "left": "",
+      "right": "Biller: {{biller}}",
+      "when": "biller"
+    },
+    {
+      "type": "text",
+      "text": "Table: {{tableNo}}",
+      "when": "tableNo"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "table",
+      "columns": ["Product", "Qty", "Price", "Amount"],
+      "layout": "invoice",
+      "itemsField": "items",
+      "rowTemplate": ["{{name}}", "{{qty}}", "{{price}}", "{{amount}}"]
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "row",
+      "left": "Total Products: {{totalItems}}",
+      "right": "Subtotal: {{subtotalAmt}}",
+      "when": "subtotalAmt"
+    },
+    {
+      "type": "table",
+      "itemsField": "taxes",
+      "rowTemplate": ["{{label}}", "{{amount}}"],
+      "columnCount": 2,
+      "when": "taxes"
+    },
+    {
+      "type": "row",
+      "left": "Combo Discount:",
+      "right": "{{comboDiscount}}",
+      "when": "comboDiscount"
+    },
+    {
+      "type": "row",
+      "left": "Discount:",
+      "right": "{{discount}}",
+      "when": "discount"
+    },
+    {
+      "type": "line",
+      "when": "netTotal"
+    },
+    {
+      "type": "row",
+      "left": "Net Total:",
+      "right": "{{netTotal}}",
+      "bold": true,
+      "when": "netTotal"
+    },
+    {
+      "type": "line",
+      "when": "netTotal"
+    },
+    {
+      "type": "row",
+      "left": "Advance Paid:",
+      "right": "{{advancePaid}}",
+      "when": "advancePaid"
+    },
+    {
+      "type": "row",
+      "left": "Balance:",
+      "right": "{{balance}}",
+      "when": "balance"
+    },
+    {
+      "type": "row",
+      "left": "Delivery Date:",
+      "right": "{{deliveryDate}}",
+      "when": "deliveryDate"
+    },
+    {
+      "type": "row",
+      "left": "Payment:",
+      "right": "{{paymentType}}",
+      "when": "paymentType"
+    },
+    {
+      "type": "row",
+      "left": "Bill Type:",
+      "right": "{{billType}}",
+      "when": "billType"
+    },
+    {
+      "type": "text",
+      "text": "Notes: {{notes}}",
+      "when": "notes"
+    },
+    {
+      "type": "line",
+      "when": "notes"
+    },
+    {
+      "type": "line",
+      "char": ".",
+      "when": "hasCustomer"
+    },
+    {
+      "type": "row",
+      "left": "Customer:",
+      "right": "{{customerName}}",
+      "when": "customerName"
+    },
+    {
+      "type": "row",
+      "left": "GST:",
+      "right": "{{customerGst}}",
+      "when": "customerGst"
+    },
+    {
+      "type": "row",
+      "left": "Phone:",
+      "right": "{{customerPhone}}",
+      "when": "customerPhone"
+    },
+    {
+      "type": "text",
+      "text": "Thank You",
+      "align": "center"
+    },
+    {
+      "type": "text",
+      "text": "{{footer}}",
+      "align": "center",
+      "when": "footer"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "cut",
+      "feedLines": 4
+    }
+  ]
+}

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>God of Flutter Printer — Full Developer Guide</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --border: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --accent2: #34d399;
+      --code-bg: #020617;
+      --warn: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+    nav {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    nav h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin: 1.2rem 0 0.5rem;
+    }
+    nav h2:first-child { margin-top: 0; }
+    nav ul { list-style: none; padding: 0; margin: 0; }
+    nav li { margin: 0.2rem 0; }
+    nav a { font-size: 0.92rem; color: var(--text); display: block; padding: 0.25rem 0.5rem; border-radius: 4px; }
+    nav a:hover { background: var(--bg); text-decoration: none; }
+    main {
+      padding: 2rem 3rem 4rem;
+      max-width: 900px;
+    }
+    h1 { font-size: 2rem; margin-top: 0; }
+    h2 { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    h3 { margin-top: 1.5rem; color: var(--accent2); }
+    p, li { color: var(--text); }
+    .subtitle { color: var(--muted); font-size: 1.1rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+    th { background: var(--surface); color: var(--accent); }
+    tr:nth-child(even) { background: rgba(30,41,59,0.5); }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+    code { font-family: "SF Mono", Consolas, monospace; }
+    p code, li code, td code {
+      background: var(--code-bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.15rem 0.6rem;
+      font-size: 0.8rem;
+      margin-right: 0.3rem;
+    }
+    .badge.ok { border-color: var(--accent2); color: var(--accent2); }
+    .badge.no { border-color: #f87171; color: #f87171; }
+    .badge.hub { border-color: var(--warn); color: var(--warn); }
+    .flow {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      font-family: monospace;
+      white-space: pre;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .note {
+      background: rgba(96,165,250,0.1);
+      border-left: 3px solid var(--accent);
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+    @media (max-width: 800px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; height: auto; }
+      main { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <nav>
+    <h2>Guide</h2>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#install">Install</a></li>
+      <li><a href="#quick-start">Quick start</a></li>
+      <li><a href="#json-schema">JSON schema</a></li>
+      <li><a href="#api">Full API</a></li>
+      <li><a href="#platform-resolution">Platform resolution</a></li>
+      <li><a href="#content-types">Content types</a></li>
+      <li><a href="#validation">Validation</a></li>
+    </ul>
+    <h2>Platforms</h2>
+    <ul>
+      <li><a href="#platforms">Support matrix</a></li>
+      <li><a href="#web">Web (Print Hub)</a></li>
+      <li><a href="#windows">Windows</a></li>
+      <li><a href="#android">Android</a></li>
+      <li><a href="#ios">iOS</a></li>
+    </ul>
+    <h2>More</h2>
+    <ul>
+      <li><a href="#discovery">Discover printers</a></li>
+      <li><a href="#multi-printer">Multi-printer POS</a></li>
+      <li><a href="#advanced">Advanced API</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+    <h2>Links</h2>
+    <ul>
+      <li><a href="../README.md">Package README</a></li>
+      <li><a href="HOW_TO_USE.md">Markdown version</a></li>
+      <li><a href="../../print_agent/README.md">Print Hub</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1 id="overview">God of Flutter Printer</h1>
+    <p class="subtitle">Stateless Flutter print worker for thermal and label printers (ESC/POS, TSPL, ZPL).</p>
+    <p>No database or printer registry inside the package. Your POS app loads printer + order data from <strong>your DB</strong> and calls one API. The package validates, resolves the connection for the current platform, encodes the payload, and prints.</p>
+
+    <div class="note">
+      <strong>Author:</strong> Balamurugan · AI Architect · Chennai, India<br>
+      <strong>Email:</strong> <a href="mailto:messagetobalamurugan@gmail.com">messagetobalamurugan@gmail.com</a> ·
+      <strong>WhatsApp:</strong> <a href="https://wa.me/917538886343">+91 75388 86343</a><br>
+      <strong>Custom solutions:</strong> Enterprise POS printing, Tamil/Hindi receipts, multi-printer setups<br>
+      <strong>Buy me a coffee (UPI):</strong> <code>balamuruganm2102-1@okaxis</code>
+    </div>
+
+    <h2 id="architecture">Architecture</h2>
+    <div class="flow">Your DB / API
+     │
+     ▼
+ PrintJobBody (JSON)  ──►  PrintJobResolver  ──►  platform path
+     │                         │
+     │                         ├─ Web     → Print Hub → USB / BT / TCP
+     │                         └─ Native  → direct USB / BT / TCP
+     ▼
+ PrintJobValidator (sync, instant)
+     ▼
+ PayloadEncoder (template / text / Tamil raster)
+     ▼
+ PrintWorker → job result</div>
+    <ul>
+      <li>No global printer config in the package.</li>
+      <li>Each job carries its own <code>printer</code> block from your DB.</li>
+      <li>Invalid jobs fail <strong>before</strong> any network or native I/O.</li>
+    </ul>
+
+    <h2 id="install">Install</h2>
+    <pre><code># pubspec.yaml
+dependencies:
+  god_of_flutter_printer: ^0.1.0</code></pre>
+    <pre><code>import 'package:god_of_flutter_printer/god_of_flutter_printer.dart';</code></pre>
+
+    <h2 id="quick-start">Quick start</h2>
+    <pre><code>final result = await PrintWorker.instance.printFromMap({
+  'type': 'template',
+  'templateId': 'tamil_check_80',
+  'data': {
+    'orderId': 'TA-1001',
+    'shopName': 'அகம கடை',
+    'total': '200.00',
+  },
+  'printer': printerRowFromDb,
+  'protocol': 'escPos',
+  'paperWidthMm': 80,
+});
+
+if (result.failedInstantly) {
+  showError(result.errorMessage);
+} else if (result.isSuccess) {
+  showOk('Printed ${result.bytesSent} bytes');
+} else {
+  showError(result.errorMessage);
+}</code></pre>
+
+    <h2 id="json-schema">Unified JSON schema</h2>
+    <p>Every job uses the <strong>same keys</strong>. Unused values are empty (<code>""</code>, <code>{}</code>, <code>0</code>).</p>
+    <pre><code>{
+  "jobId": "",
+  "type": "template",
+  "templateId": "tamil_check_80",
+  "data": { "orderId": "TA-1001", "total": "200.00" },
+  "text": "",
+  "document": {},
+  "bytes": "",
+  "printer": {
+    "connectionType": "",
+    "brand": "Rugtek",
+    "printerName": "Rugtek Printer",
+    "ip": "192.168.1.50",
+    "port": 9100,
+    "address": "",
+    "hubUrl": "http://192.168.1.10:9280"
+  },
+  "protocol": "escPos",
+  "paperWidthMm": 80,
+  "charset": "",
+  "options": {
+    "timeoutMs": 15000,
+    "retries": 1,
+    "prependInit": true,
+    "allowRasterFallback": true
+  }
+}</code></pre>
+
+    <h3>Printer fields</h3>
+    <table>
+      <tr><th>Field</th><th>Used for</th><th>Example</th></tr>
+      <tr><td><code>connectionType</code></td><td>Optional override</td><td><code>""</code>, <code>usb</code>, <code>network</code>, <code>bluetooth</code></td></tr>
+      <tr><td><code>brand</code></td><td>Label / logs</td><td><code>Rugtek</code></td></tr>
+      <tr><td><code>printerName</code></td><td>USB (spooler name)</td><td><code>Rugtek Printer</code></td></tr>
+      <tr><td><code>ip</code></td><td>Network printer</td><td><code>192.168.1.50</code></td></tr>
+      <tr><td><code>port</code></td><td>Network port</td><td><code>9100</code></td></tr>
+      <tr><td><code>address</code></td><td>Bluetooth MAC (Win/Android) or BLE UUID (iOS)</td><td><code>60:6e:41:c8:0e:ad</code></td></tr>
+      <tr><td><code>hubUrl</code></td><td><strong>Web only</strong> — Print Hub</td><td><code>http://192.168.1.10:9280</code></td></tr>
+    </table>
+
+    <h2 id="api">Full API</h2>
+    <h3>Primary print methods</h3>
+    <table>
+      <tr><th>Method</th><th>Description</th></tr>
+      <tr><td><code>printFromMap(map)</code></td><td><strong>Recommended</strong> — JSON from DB/API</td></tr>
+      <tr><td><code>printBody(PrintJobBody)</code></td><td>Same, typed</td></tr>
+      <tr><td><code>validateJob(spec)</code></td><td>Sync validation — no I/O</td></tr>
+      <tr><td><code>printJob(spec)</code></td><td>Validate + print, wait</td></tr>
+      <tr><td><code>submitPrintJob(spec)</code></td><td>Queue, return immediately</td></tr>
+    </table>
+
+    <h3>Discovery &amp; agent</h3>
+    <table>
+      <tr><th>Method</th><th>Platform</th><th>Description</th></tr>
+      <tr><td><code>listUsbPrinters()</code></td><td>Win, Android</td><td>USB printer names</td></tr>
+      <tr><td><code>listBluetoothDevices()</code></td><td>Win, Android, iOS</td><td>Paired / BLE devices</td></tr>
+      <tr><td><code>listBluetoothDevices(agentBaseUrl:)</code></td><td>Web</td><td>Via Print Hub</td></tr>
+      <tr><td><code>probePrintAgent(url)</code></td><td>Web</td><td>Check hub online</td></tr>
+      <tr><td><code>discoverPrintAgentUrl()</code></td><td>Web</td><td>Auto-find hub</td></tr>
+    </table>
+
+    <h3>Job monitoring</h3>
+    <table>
+      <tr><th>Method</th><th>Description</th></tr>
+      <tr><td><code>execute(request)</code></td><td>Low-level async — returns jobId</td></tr>
+      <tr><td><code>executeAndWait(request)</code></td><td>Wait for completion</td></tr>
+      <tr><td><code>getJobStatus(jobId)</code></td><td>Poll status</td></tr>
+      <tr><td><code>jobEvents</code></td><td>Stream of status changes</td></tr>
+      <tr><td><code>logStream</code></td><td>Per-job structured logs</td></tr>
+    </table>
+
+    <h2 id="platform-resolution">Platform resolution</h2>
+    <p>Same <code>printer</code> object from DB — different behaviour per runtime:</p>
+    <h3>Auto-detect (<code>connectionType</code> empty)</h3>
+    <table>
+      <tr><th>Priority</th><th>Web</th><th>Windows / Android / iOS</th></tr>
+      <tr><td>1</td><td><code>printerName</code> → USB via Hub</td><td><code>ip</code> → direct TCP</td></tr>
+      <tr><td>2</td><td><code>ip</code> → network via Hub</td><td><code>address</code> → Bluetooth</td></tr>
+      <tr><td>3</td><td><code>address</code> → BT via Hub</td><td><code>printerName</code> → USB</td></tr>
+    </table>
+
+    <h3>Example: one DB row, web + Windows</h3>
+    <pre><code>{
+  "printerName": "Rugtek Printer",
+  "ip": "192.168.1.50",
+  "hubUrl": "http://192.168.1.10:9280"
+}</code></pre>
+    <ul>
+      <li><strong>Web cashier</strong> → Hub + USB name <code>Rugtek Printer</code></li>
+      <li><strong>Windows POS</strong> → TCP <code>192.168.1.50:9100</code> (ignores hubUrl)</li>
+    </ul>
+
+    <h2 id="content-types">Content types</h2>
+    <table>
+      <tr><th><code>type</code></th><th>Required</th><th>Use</th></tr>
+      <tr><td><code>template</code></td><td><code>templateId</code>, <code>data</code></td><td>Receipts, KOT, invoices</td></tr>
+      <tr><td><code>text</code></td><td><code>text</code></td><td>Plain / Tamil / Hindi</td></tr>
+      <tr><td><code>document</code></td><td><code>document</code></td><td>Block JSON layout</td></tr>
+      <tr><td><code>raw</code></td><td><code>bytes</code></td><td>Pre-encoded ESC/POS</td></tr>
+    </table>
+    <p>Built-in templates: <code>tamil_check_80</code>, <code>kitchen_kot_80</code>, <code>invoice_80</code>, <code>day_close_80</code></p>
+
+    <h3>Tamil / Hindi</h3>
+    <p>Set <code>options.allowRasterFallback: true</code> (default). Non-ASCII text is rendered as ESC/POS bitmap lines.</p>
+
+    <h2 id="validation">Validation (fail fast)</h2>
+    <p>Validation is <strong>synchronous</strong> — no spinner, no timeout.</p>
+    <pre><code>final result = await PrintWorker.instance.printFromMap(badMap);
+if (result.failedInstantly) {
+  debugPrint(result.errorMessage);
+}</code></pre>
+
+    <h2 id="platforms">Platform support matrix</h2>
+    <table>
+      <tr><th>Platform</th><th>USB</th><th>Bluetooth</th><th>Network</th><th>How</th></tr>
+      <tr><td>Windows</td><td><span class="badge ok">Direct</span></td><td><span class="badge ok">Classic SPP</span></td><td><span class="badge ok">Direct</span></td><td>Native plugin</td></tr>
+      <tr><td>Android</td><td><span class="badge ok">USB OTG</span></td><td><span class="badge ok">Classic SPP</span></td><td><span class="badge ok">Direct</span></td><td>Native plugin</td></tr>
+      <tr><td>iOS</td><td><span class="badge no">No</span></td><td><span class="badge ok">BLE only</span></td><td><span class="badge ok">Direct</span></td><td>Native plugin</td></tr>
+      <tr><td>Web</td><td><span class="badge hub">Via Hub</span></td><td><span class="badge hub">Via Hub</span></td><td><span class="badge hub">Via Hub</span></td><td>print_agent</td></tr>
+    </table>
+
+    <h2 id="web">Web — Print Hub setup</h2>
+    <p>Browsers cannot access USB or Bluetooth directly. Install <strong>Print Hub</strong> on the counter PC.</p>
+    <h3>Build (developer)</h3>
+    <pre><code>cd print_agent
+.\scripts\package_release.ps1
+# Output: print_agent/dist/PrintWorkerHub-win64.zip</code></pre>
+    <h3>Install (shop)</h3>
+    <ol>
+      <li>Unzip on the counter PC.</li>
+      <li>Right-click <code>install_hub.bat</code> → Run as administrator.</li>
+      <li>Copy LAN URL from desktop shortcut or <code>C:\ProgramData\PrintWorkerHub\hub-url.txt</code>.</li>
+    </ol>
+    <h3>Web app JSON</h3>
+    <pre><code>"printer": {
+  "printerName": "Rugtek Printer",
+  "hubUrl": "http://192.168.1.10:9280"
+}</code></pre>
+    <h3>Probe hub</h3>
+    <pre><code>final probe = await PrintWorker.instance.probePrintAgent(
+  'http://192.168.1.10:9280',
+  discover: true,
+);
+if (probe.online) print(probe.printers);</code></pre>
+
+    <h2 id="windows">Windows native</h2>
+    <p>No Print Hub needed. Uses <code>ip</code> or <code>printerName</code> directly.</p>
+    <h3>USB</h3>
+    <ul>
+      <li>Install printer driver in Windows.</li>
+      <li>Use exact spooler name in <code>printer.printerName</code>.</li>
+      <li>List: <code>await PrintWorker.instance.listUsbPrinters()</code></li>
+    </ul>
+    <h3>Bluetooth Classic</h3>
+    <ul>
+      <li>Pair in Settings → Bluetooth.</li>
+      <li>List: <code>await PrintWorker.instance.listBluetoothDevices()</code></li>
+      <li>Store MAC in <code>printer.address</code> (e.g. <code>60:6e:41:c8:0e:ad</code>).</li>
+    </ul>
+    <h3>Network</h3>
+    <p>Set <code>printer.ip</code> and <code>port</code> (default <code>9100</code>).</p>
+
+    <h2 id="android">Android native</h2>
+    <h3>USB</h3>
+    <ul>
+      <li>Connect printer via USB OTG.</li>
+      <li>Approve USB permission when prompted.</li>
+      <li>List: <code>await PrintWorker.instance.listUsbPrinters()</code></li>
+      <li>Use product ID suffix in name, e.g. <code>Rugtek [1234]</code></li>
+    </ul>
+    <h3>Bluetooth Classic</h3>
+    <ul>
+      <li><strong>Pair first</strong> in Android Settings → Bluetooth.</li>
+      <li>List bonded devices: <code>await PrintWorker.instance.listBluetoothDevices()</code></li>
+      <li>Store MAC in <code>printer.address</code>.</li>
+    </ul>
+    <h3>Network</h3>
+    <p>Same as Windows — set <code>printer.ip</code>.</p>
+
+    <h2 id="ios">iOS native</h2>
+    <div class="note">
+      iOS does <strong>not</strong> support USB printing or Bluetooth Classic (SPP). Use <strong>BLE thermal printers</strong> or <strong>network (TCP)</strong>.
+    </div>
+    <h3>Info.plist</h3>
+    <pre><code>&lt;key&gt;NSBluetoothAlwaysUsageDescription&lt;/key&gt;
+&lt;string&gt;This app uses Bluetooth to connect to receipt printers.&lt;/string&gt;</code></pre>
+    <h3>BLE printer setup</h3>
+    <ol>
+      <li>Turn on the BLE thermal printer.</li>
+      <li>Scan: <code>await PrintWorker.instance.listBluetoothDevices()</code></li>
+      <li>Store the device <strong>UUID</strong> in <code>printer.address</code> (not MAC).</li>
+      <li>Example UUID: <code>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</code></li>
+    </ol>
+    <h3>Network</h3>
+    <p>Set <code>printer.ip</code> and <code>port</code> — works the same as other platforms.</p>
+    <h3>Run on device</h3>
+    <pre><code>cd example
+flutter run -d &lt;ios-device-id&gt;</code></pre>
+
+    <h2 id="discovery">Discover printers (settings UI)</h2>
+    <pre><code>// Windows / Android USB
+final usb = await PrintWorker.instance.listUsbPrinters();
+
+// Native Bluetooth (Classic on Win/Android, BLE on iOS)
+final bt = await PrintWorker.instance.listBluetoothDevices();
+
+// Web via hub
+final btWeb = await PrintWorker.instance.listBluetoothDevices(
+  agentBaseUrl: hubUrl,
+);</code></pre>
+    <p>Production print jobs still use DB JSON — discovery is for admin/settings screens only.</p>
+
+    <h2 id="multi-printer">Multi-printer POS</h2>
+    <pre><code>for (final line in order.lines) {
+  final printerRow = await db.printer(line.printerId);
+  await PrintWorker.instance.printFromMap({
+    'type': 'template',
+    'templateId': line.templateId,
+    'data': line.templateData,
+    'printer': printerRow.toJson(),
+    'paperWidthMm': printerRow.paperWidth,
+  });
+}</code></pre>
+    <p>Kitchen → network IP. Counter → USB. Web cashier → hub. <strong>Same schema</strong>, different filled fields.</p>
+
+    <h2 id="advanced">Advanced: PrintRequest API</h2>
+    <pre><code>await PrintWorker.instance.execute(
+  PrintRequest(
+    connection: PrintConnection.network(host: '192.168.1.50'),
+    protocol: PrintProtocol.escPos,
+    paperWidthMm: 80,
+    mode: PrintMode.text,
+    payload: PrintPayload.text('Hello'),
+  ),
+);</code></pre>
+    <p>Prefer <code>printFromMap</code> for DB-driven POS apps.</p>
+
+    <h2 id="troubleshooting">Troubleshooting</h2>
+    <table>
+      <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+      <tr><td><code>failedInstantly</code></td><td>Missing JSON field</td><td>Fix DB row</td></tr>
+      <tr><td>Web hub offline</td><td>Print Hub not running</td><td>Install / start hub</td></tr>
+      <tr><td>iOS no printers</td><td>BLE scan empty</td><td>Turn printer on; enable Bluetooth; refresh</td></tr>
+      <tr><td>iOS USB error</td><td>Platform limitation</td><td>Use BLE or network</td></tr>
+      <tr><td>Android BT fail</td><td>Not paired</td><td>Pair in Settings first</td></tr>
+      <tr><td>Windows USB empty</td><td>Driver missing</td><td>Install printer driver</td></tr>
+      <tr><td>Tamil boxes</td><td>Raster off</td><td><code>allowRasterFallback: true</code></td></tr>
+      <tr><td>Invalid address iOS</td><td>MAC instead of UUID</td><td>Use BLE UUID from discovery</td></tr>
+    </table>
+
+    <p style="margin-top:3rem;color:var(--muted);font-size:0.9rem;">
+      god_of_flutter_printer · <a href="../README.md">Package README</a> · <a href="HOW_TO_USE.md">Markdown guide</a>
+    </p>
+  </main>
+</div>
+</body>
+</html>

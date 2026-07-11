@@ -1,0 +1,159 @@
+{
+  "id": "day_close_80",
+  "protocol": "escpos",
+  "paperWidthMm": 80,
+  "blocks": [
+    {
+      "type": "text",
+      "text": "{{reportTitle}}",
+      "align": "center",
+      "bold": true,
+      "size": "large"
+    },
+    {
+      "type": "feed",
+      "lines": 1
+    },
+    {
+      "type": "text",
+      "text": "{{shopName}}",
+      "align": "center",
+      "bold": true,
+      "when": "shopName"
+    },
+    {
+      "type": "text",
+      "text": "{{shopAddress}}",
+      "align": "center",
+      "when": "shopAddress"
+    },
+    {
+      "type": "feed",
+      "lines": 1
+    },
+    {
+      "type": "row",
+      "left": "Date: {{date}}",
+      "right": "Time: {{time}}"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "text",
+      "text": "{{salesSummaryTitle}}",
+      "align": "center",
+      "bold": true
+    },
+    {
+      "type": "row",
+      "left": "{{totalNetSalesLabel}}",
+      "right": "{{totalNetSales}}",
+      "when": "totalNetSales"
+    },
+    {
+      "type": "row",
+      "left": "{{taxLabel}}",
+      "right": "{{taxAmount}}",
+      "when": "taxAmount"
+    },
+    {
+      "type": "row",
+      "left": "{{discountLabel}}",
+      "right": "{{discount}}",
+      "when": "discount"
+    },
+    {
+      "type": "row",
+      "left": "{{totalInclusiveTaxLabel}}",
+      "right": "{{totalInclusiveTax}}",
+      "when": "totalInclusiveTax"
+    },
+    {
+      "type": "row",
+      "left": "{{totalExclusiveTaxLabel}}",
+      "right": "{{totalExclusiveTax}}",
+      "when": "totalExclusiveTax"
+    },
+    {
+      "type": "row",
+      "left": "{{comboOfferLabel}}",
+      "right": "{{comboOffer}}",
+      "when": "comboOffer"
+    },
+    {
+      "type": "row",
+      "left": "{{totalSalesLabel}}",
+      "right": "{{totalSales}}",
+      "when": "totalSales"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "text",
+      "text": "{{salesCategoriesTitle}}",
+      "align": "center",
+      "bold": true,
+      "when": "categories"
+    },
+    {
+      "type": "table",
+      "itemsField": "categories",
+      "rowTemplate": ["{{name}}", "{{amount}}"],
+      "columnCount": 2,
+      "when": "categories"
+    },
+    {
+      "type": "line",
+      "when": "categories"
+    },
+    {
+      "type": "text",
+      "text": "{{paymentDetailsTitle}}",
+      "align": "center",
+      "bold": true
+    },
+    {
+      "type": "row",
+      "left": "{{cashLabel}}",
+      "right": "{{cash}}",
+      "when": "cash"
+    },
+    {
+      "type": "row",
+      "left": "{{onlineLabel}}",
+      "right": "{{online}}",
+      "when": "online"
+    },
+    {
+      "type": "row",
+      "left": "{{cardLabel}}",
+      "right": "{{card}}",
+      "when": "card"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "row",
+      "left": "{{totalPaymentLabel}}",
+      "right": "{{totalPayment}}",
+      "bold": true,
+      "when": "totalPayment"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "text",
+      "text": "{{footer}}",
+      "align": "center",
+      "when": "footer"
+    },
+    {
+      "type": "cut",
+      "feedLines": 4
+    }
+  ]
+}
